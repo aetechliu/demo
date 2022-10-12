@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.CityMapper">
+
+    <!-- 検索日本的城市，国家名-->
+    <!--  select后面的名字要和CityInfo.java中的name,country 名字一致-->
+    <!-- INNER JOIN ...ON.. 这是SQL的内连接用法，用于通过ON后面的两表共同字段来连接两个表，检索出两个表共有的数据 参考： https://www.w3schools.com/sql/sql_join_inner.asp-->
+    <!-- where是在取出两表共同数据的前提下，继续追加条件，此处是追加一个国家过滤条件，仅仅找出国家是日本的数据 -->
+    <select id="allCity" resultType="com.example.demo.CityInfo">
+       SELECT world.city.name, world.country.name as country  FROM world.city  
+		INNER JOIN world.country ON  world.city.CountryCode = world.country.code
+		where world.country.name = 'Japan'
+    </select>
+</mapper>

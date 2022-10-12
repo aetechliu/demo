@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<style>
+		ul li::marker {
+		  color: red;
+		  font-size: 1.5em;
+	}
+</style>
+</head>
+<body>
+<h2>City List11</h2>
+<!-- 这个范围内的信息是注释，如同java代码中的// 
+th是thymeleaf的标签，表示后面跟的是thymeleaf的逻辑。
+each是循环每一个的意思。 
+c: ${citys} 中的【citys】是一个数组或者list列表， 来源于Controller.java中的【model.addAttribute("citys", cityLs);】
+其中的【c】是一个形式变量，表示每一次从citys中取出的一个对象。
+因为citys中容纳的是CityInfo.java类型，而CityInfo.java中有一个name的变量。所以*{name}"表示需要显示的是CityInfo.java中的name的值
+Tokyo这个字符串在"*{name}"中有值的时候是不会显示的。
+ -->
+<ul th:each="c: ${citys}" th:object="${c}">
+  <li>
+    <span th:text="*{name}"></span>-<span th:text="*{country}"></span>
+  </li>
+</ul> 
+
+</body>
+</html>
